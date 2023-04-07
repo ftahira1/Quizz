@@ -4,10 +4,89 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timed web developer quiz.</title>
+    <title>Timed coding quiz.</title>
 </head>
 <body>
-    
-    
+    <div class="quiz-note">
+        <header>
+            <!-- High score and timer sections -->
+         <p id="view-high-scores">View high scores</p>
+         <p id="time-countdown">Time: 0</p>
+        </header>
+         <!-- Main quiz note! -->
+        <main>
+            <!-- Welcoming Message! -->
+            <section class="quiz-data">
+                <h1 id="title">Coding Quiz Challenge</h1>
+                <p>
+                  Try to answer the following code-related questions within the time
+                  limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!
+                </p>
+                <button id="start-quiz">Start Quiz</button>
+            </section>
+
+            <!-- Quiz data! -->
+            <section class="quiz-data">
+                <h2 id="quiz-questions">
+                  Commonly used data types DO NOT include:
+                </h2>
+      
+                <!-- Multiple choice options! -->
+                <article class="option-butttons">
+                  <button class="option-btn">
+                    <span class="number">1. </span
+                    ><span class="answer-one">strings</span>
+                  </button>
+                  <button class="option-btn">
+                    <span class="number">2. </span
+                    ><span class="answer-two">booleans</span>
+                  </button>
+                  <button class="option-btn">
+                    <span class="number">3. </span
+                    ><span class="answer-three">alerts</span>
+                  </button>
+                  <button class="option-btn">
+                    <span class="number">4. </span
+                    ><span class="answer-four">numbers</span>
+                  </button>
+                </article>
+                <div class="right-answer">Correct!</div>
+                <div class="wrong-answer">Wrong</div>
+            </section>
+
+            <!-- Completed quiz! -->
+            <section class="quiz-data">
+                <h3 id="all-done">All done!</h3>
+                <p id="final-text">Your final score is
+                <span class="final-score">0.</span> </p>
+      
+                <form id="form">
+                  <p>Enter initials:</p>
+                  <input type="text" id="initials"/>
+                  <button type="button" class="button" id="submit-high-score">
+                    <span class="submit-initials">Submit</span>
+                  </button>
+                </form>
+              </section>
+
+              <!-- See high scores! -->
+            <section class="quiz-data">
+                <h4 class="high-scores-data">High Scores</h4>
+                <div class="wrap-btn">
+                  <button class="button" id="go-back-btn">
+                    <span class="go">Go back</span>
+                  </button>
+                  <button class="button" id="clear-btn">
+                    <span class="clear-high-scores">Clear high scores</span>
+                  </button>
+                </div>
+              </section>
+
+
+        </main>
+    </div>
+
+ 
+
 </body>
 </html>
