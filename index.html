@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Timed coding quiz.</title>
 </head>
 <body>
@@ -16,9 +17,9 @@
          <!-- Main quiz note! -->
         <main>
             <!-- Welcoming Message! -->
-            <section class="quiz-data">
+            <section class="quiz-welc">
                 <h1 id="title">Coding Quiz Challenge</h1>
-                <p>
+                <p id="message">
                   Try to answer the following code-related questions within the time
                   limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!
                 </p>
@@ -32,30 +33,30 @@
                 </h2>
       
                 <!-- Multiple choice options! -->
-                <article class="option-butttons">
-                  <button class="option-btn">
+                <article class="option-buttons">
+                  <button class="button" >
                     <span class="number">1. </span
-                    ><span class="answer-one">strings</span>
+                    ><span class="answer">strings</span>
                   </button>
-                  <button class="option-btn">
+                  <button class="button"  >
                     <span class="number">2. </span
-                    ><span class="answer-two">booleans</span>
+                    ><span class="answer">booleans</span>
                   </button>
-                  <button class="option-btn">
+                  <button class="button" >
                     <span class="number">3. </span
-                    ><span class="answer-three">alerts</span>
+                    ><span class="answer">alerts</span>
                   </button>
-                  <button class="option-btn">
+                  <button class="button" >
                     <span class="number">4. </span
-                    ><span class="answer-four">numbers</span>
+                    ><span class="answer">numbers</span>
                   </button>
                 </article>
-                <div class="right-answer">Correct!</div>
-                <div class="wrong-answer">Wrong</div>
+                <div id="right-answer">Correct!</div>
+                <div id="wrong-answer">Wrong</div>
             </section>
 
             <!-- Completed quiz! -->
-            <section class="quiz-data">
+            <section id="quiz-done">
                 <h3 id="all-done">All done!</h3>
                 <p id="final-text">Your final score is
                 <span class="final-score">0.</span> </p>
@@ -63,20 +64,20 @@
                 <form id="form">
                   <p>Enter initials:</p>
                   <input type="text" id="initials"/>
-                  <button type="button" class="button" id="submit-high-score">
+                  <button  id="submit-high-score">
                     <span class="submit-initials">Submit</span>
                   </button>
                 </form>
               </section>
 
               <!-- See high scores! -->
-            <section class="quiz-data">
+            <section id="quiz-score">
                 <h4 class="high-scores-data">High Scores</h4>
                 <div class="wrap-btn">
-                  <button class="button" id="go-back-btn">
+                  <button id="go-back-btn">
                     <span class="go">Go back</span>
                   </button>
-                  <button class="button" id="clear-btn">
+                  <button id="clear-btn">
                     <span class="clear-high-scores">Clear high scores</span>
                   </button>
                 </div>
@@ -86,7 +87,6 @@
         </main>
     </div>
 
- 
-
+    <!-- <script src="main.js"></script> -->
 </body>
 </html>

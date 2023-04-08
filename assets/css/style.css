@@ -1,0 +1,262 @@
+ :root {
+    --fontf--:sans-serif;
+    --violet--:violet;
+    --purple--:rgb(64, 11, 118);
+    --ligrey--:rgb(192, 191, 191);
+ }
+
+
+ body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 370px;
+    font-family: sans-serif;
+ }
+
+ .quiz-note {
+    border: 2px solid black;
+    border-radius: 2%;
+    width: 89%;
+    height: 70vw;
+ }
+
+ header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 80%;
+ }
+
+ button {
+    background-color: var(--purple--);
+    color: aliceblue;
+    cursor: pointer;
+    border: 2px solid var(--purple--);
+    border-radius: 6px;
+ }
+
+ button:hover {
+    background-color: var(--violet--);
+ }
+
+ #view-high-scores {
+    font-family: var(--fontf--);
+    color: var(--violet--)
+ }
+
+ .quiz-welc {
+    display: none;
+    text-align: center;
+ }
+
+ #title {
+    height: 9vw;
+ }
+
+ #start-quiz {
+    position: relative;
+    bottom: -5vw;
+    padding: 1%;
+ }
+
+ .quiz-data {
+    display: none;
+    /* display: flex; */
+    flex-direction: column;
+    padding: 2%;
+ }
+
+ .option-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 6%;
+    height: 20vw;
+    position: relative;
+    bottom: 25px;
+ }
+
+ #quiz-questions {
+    position: relative;
+    bottom: 20px;
+ }
+
+ #right-answer {
+    display: none;
+    border-top: 2px solid var(--ligrey--);
+    color: var(--ligrey--);
+    position: relative;
+    bottom: 15px;
+ }
+
+ #wrong-answer {
+    border-top: 2px solid var(--ligrey--);
+    color: var(--ligrey--);
+    position: relative;
+    bottom: 15px;
+ }
+
+ #quiz-done {
+    display: none;
+    /* display: flex; */
+    flex-direction: column;
+    position: relative;
+    left: 20%;
+ }
+
+ #quiz-score {
+    display: none;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 20%;
+    top: 30px;
+ }
+
+
+
+ @media screen and (min-width: 767px) {
+
+   header {
+      font-size: 120%;
+   }
+
+   #view-high-scores {
+        position: relative;
+        left: 7%;
+    }
+
+   #time-countdown {
+      position: relative;
+      right: 7%;
+   }
+
+   .quiz-welc {
+      position: relative;
+      top: 12vw;
+   }
+
+   #start-quiz {
+      position: relative;
+      bottom: -10vw;
+   }
+
+   .option-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    height: 30vw;
+   }
+
+   .quiz-data {
+    padding-left: 11vw;
+    position: relative;
+    bottom: -48px;
+   }
+
+   .button {
+    width: 26vw;
+    height: 7vh;
+    text-align: left;
+    font-size: 15px;
+   }
+
+   #quiz-questions {
+      font-size: 35px;
+   }
+
+   #quiz-done {
+    font-size: 25px;
+    position: relative;
+    top: 6vw;
+   }
+
+   #form {
+      display: -webkit-inline-box;
+   }
+
+   #initials {
+    position: relative;
+    top: 3vh;
+    left: 1vw;
+    padding: 10px;
+   }
+
+   #submit-high-score {
+    position: relative;
+    top: 3vh;
+    left: 4vw;
+    padding: 10px;
+   }
+
+   #quiz-score {
+    position: relative;
+    font-size: 30px;
+    top: 12vh;
+   }
+
+   #go-back-btn {
+      font-size: 3vh;
+   }
+
+   #clear-btn {
+      font-size: 3vh;
+   }
+ }
+
+
+ @media  screen and (min-width: 1023px) {
+   
+   .quiz-note {
+      height: 50vw;
+   }
+
+   .quiz-welc {
+    position: relative;
+    top: 2vw;
+    font-size: 18px;
+  }
+
+  #title {
+   height: 2vw;
+   font-size: 3vw;
+  }
+
+  #message {
+   text-align: center;
+    padding: 13vw;
+    position: relative;
+    top: -19vh;
+  }
+
+  #start-quiz {
+   font-size: 16px;
+    position: relative;
+    bottom: 37vh;
+  }
+
+  .quiz-data {
+   padding-left: 11vw;
+    position: relative;
+    bottom: 16px;
+    position: relative;
+    top: 5vh;
+  }
+
+  #quiz-questions {
+   font-size: 27px;
+    padding-left: 22vw;
+    position: relative;
+    right: 10vw;
+  }
+
+  .option-buttons {
+   height: 20vw;
+    position: relative;
+    left: 12vw;
+  }
+
+  .button {
+   width: 16vw;
+  }
+ }
