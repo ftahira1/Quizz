@@ -42,26 +42,50 @@ var viewHighScores = document.querySelector("#view-high-scores");
 
 //Different sections query selection
 var quizWelc = document.querySelector(".quiz-welc");
-var quizData = document.querySelector("#quiz-data");
+var quizData = document.querySelector(".quiz-data");
 var quizDone = document.querySelector("#quiz-done");
 var quizScore =document.querySelector("#quiz-score");
 
 //All the buttons query selection
 var startQuiz = document.querySelector("#start-quiz");
-var answer = document.querySelector(".answer");
+var answer = document.querySelectorAll(".answer");
 var submitHighScore = document.querySelector("#submit-high-score");
 var goBackBtn = document.querySelector("#go-back-btn");
 var clearHighScores = document.querySelector("#clear-high-scores");
 
 //Questions in quiz-data section
 var quizQuestions = document.querySelector("#quiz-questions");
-var optionButtons = document.querySelector(".option-buttons");
+var answerButton = document.querySelectorAll(".button");
 var rightAnswer = document.querySelector("#right-answer");
-var wrongAnswer = docume.querySelector("#wrong-question");
+var wrongAnswer = document.querySelector("#wrong-question");
 
 //Submitted answers
 var finalScore = document.querySelector("#final-score");
 var scoreNumber = document.querySelector("#score-number");
 
+//Time countdown variables
+var quizTime;
+var secondsLeft = 60;
 
+
+//quiz starts here
+
+startQuiz.addEventListener("click", beginQuiz);
+
+function beginQuiz () {
+    quizWelc.style.display = "none";
+    quizData.style.display = "flex";
+
+    //start countdown
+    quizTime = setInterval(function() {
+        if(secondsLeft > 0) {
+            secondsLeft--;
+            timeCountdown.textContent = "Time: " + secondsLeft;
+        } else {
+            clearInterval(quizTime);
+            timeCountdown.textContent = "Time: 0"
+        }
+    },1000);
+
+}
 
