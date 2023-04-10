@@ -94,6 +94,8 @@
  }
 
  #wrong-answer {
+   display: none;
+   /* display: flex; */
     border-top: 2px solid var(--ligrey--);
     color: var(--ligrey--);
     position: relative;

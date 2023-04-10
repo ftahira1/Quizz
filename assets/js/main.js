@@ -66,8 +66,9 @@ var finalScore = document.querySelector("#final-score");
 var scoreNumber = document.querySelector("#score-number");
 
 //Time countdown variables
-var quizTime;
+var setTime;
 var secondsLeft = 60;
+var liveScore = 0;
 
 
 //Quiz starts here
@@ -78,13 +79,13 @@ function beginQuiz () {
     quizWelc.style.display = "none";
     quizData.style.display = "flex";
 
-    //Add event listener to buttons
+    //Add event listener to buttons to check the if its right or wrong.
     for (var i = 0; i < button.length; i++) {
-        button[i].addEventListener("click",rightWrong);
+        button[i].addEventListener("click",checkAnswer);
     }
 
     //Start countdown
-    quizTime = setInterval(function() {
+    setTime = setInterval(function() {
         if(secondsLeft > 0) {
             secondsLeft--;
             timeCountdown.textContent = "Time: " + secondsLeft;
@@ -93,37 +94,28 @@ function beginQuiz () {
         }
     }, 1000);
 
-    //Add event listener to buttons
     
 };
 
 
-var correctAnswer = questions[0].correct;
-
-function rightWrong() {
-    var x = answer.textContent;
-    if (x === correctAnswer) {
-        liveScore += 10;
-        wrongAnswer.style.display = "none";
-        rightAnswer.style.display = "block";
+var correctAnswer = questions.map(({questions, choices, correct}) => ({correct}));
+var ans = answer.textContent
+function checkAnswer() {
+    if (ans === correctAnswer) {
+     secondsLeft = secondsLeft + 10;
     } else {
-    wrongAnswer.style.display = "block";
-    rightAnswer.style.display = "none";
-    secondsLeft = secondsLeft -10;
+    secondsLeft = secondsLeft - 10;
     }
 }
 
 
 
 //Questions loop
-var liveScore = 0;
 var textIndex = 1;
 optionBtn.addEventListener("click", contQuiz)
 
 function contQuiz() {
 
-    // wrongAnswer.style.display = "none";
-    // rightAnswer.style.display = "none";
 
     if (secondsLeft > 0 && liveScore < 10) {
         if(textIndex < questions.length) {
@@ -134,9 +126,9 @@ function contQuiz() {
                 answer[i].textContent = x.choices[i];
                       }
               } else {
-                secondsLeft = 0;
-                completedQuiz();
-                liveScore += secondsLeft;
+                // secondsLeft = 0;
+                // completedQuiz();
+                // liveScore += secondsLeft;
               }
         } 
             
@@ -144,11 +136,11 @@ function contQuiz() {
 
 function completedQuiz() {
     quizData.style.display = "none";
-    quizDone.style.display = "flex"; 
-    // finalScore.textContent = liveScore;  
+    quizDone.style.display = "flex";
+    
+    submitHighScore.addEventListener("click", viewHighScores);
 }
 
-submitHighScore.addEventListener("click", viewHighScores);
 
 function viewHighScores() {
     quizDone.style.display = "none";
