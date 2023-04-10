@@ -141,6 +141,11 @@
       right: 7%;
    }
 
+   #current-score {
+      position: relative;
+      right: 7%;
+   }
+
    .quiz-welc {
       position: relative;
       top: 12vw;

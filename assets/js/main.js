@@ -3,34 +3,34 @@
 var questions = [{
     question: "Commonly used data types DO not include:",
     choices: ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
-    answer: "3. alerts",
+    correct: "3. alerts",
 },
 {
     question: "The condition in an if/else statement is enclosed within _____.",
     choices: ["1. quotes", "2. curly brackets", "3. parenthesis", "4. square brackets"],
-    answer: "4. parenthesis", 
+    correct: "4. parenthesis", 
 },
 {
     question: "Arrays in javascript can be used to store _______.",
     choices: ["1. number and strings", "2. other arrays", "3. booleans", "4. all of the above"],
-    answer: "4. all of the above", 
+    correct: "4. all of the above", 
 },
 {
     question: "Inside which HTML element do we put the JavaScript?",
     choices: ["1. <scripting>", "2. <script>", "3. <js>", "4. <javascript>"],
-    answer: "2. <script>", 
+    correct: "2. <script>", 
 },
 {
     question: "Where is the correct place to insert a JavaScript?",
     choices: ["1. body", "2. head", "3. both", "4. neither"],
-    answer: "3. both", 
+    correct: "3. both", 
 },
 {
     question: "How does a FOR loop start?",
     choices: ["1. for(i = 0; i <= 50)", "2. for (i = 0;i <= 5; i++)", "3. for (i <= 5; i++)", "4. for i = 1 to 5"],
-    answer: "3. for (i = 0; i <= 5; i++)", 
+    correct: "3. for (i = 0; i <= 5; i++)", 
 },
-];
+]
 
 // Query selector variables
 
@@ -52,12 +52,14 @@ var answer = document.querySelectorAll(".answer");
 var submitHighScore = document.querySelector("#submit-high-score");
 var goBackBtn = document.querySelector("#go-back-btn");
 var clearHighScores = document.querySelector("#clear-high-scores");
+var button = document.querySelectorAll(".button");
+var optionBtn = document.querySelector(".option-buttons")
 
 //Questions in quiz-data section
 var quizQuestions = document.querySelector("#quiz-questions");
 var answerButton = document.querySelectorAll(".button");
 var rightAnswer = document.querySelector("#right-answer");
-var wrongAnswer = document.querySelector("#wrong-question");
+var wrongAnswer = document.querySelector("#wrong-answer");
 
 //Submitted answers
 var finalScore = document.querySelector("#final-score");
@@ -68,7 +70,7 @@ var quizTime;
 var secondsLeft = 60;
 
 
-//quiz starts here
+//Quiz starts here
 
 startQuiz.addEventListener("click", beginQuiz);
 
@@ -76,16 +78,84 @@ function beginQuiz () {
     quizWelc.style.display = "none";
     quizData.style.display = "flex";
 
-    //start countdown
+    //Add event listener to buttons
+    for (var i = 0; i < button.length; i++) {
+        button[i].addEventListener("click",rightWrong);
+    }
+
+    //Start countdown
     quizTime = setInterval(function() {
         if(secondsLeft > 0) {
             secondsLeft--;
             timeCountdown.textContent = "Time: " + secondsLeft;
         } else {
-            clearInterval(quizTime);
-            timeCountdown.textContent = "Time: 0"
+            completedQuiz();
         }
-    },1000);
+    }, 1000);
 
+    //Add event listener to buttons
+    
+};
+
+
+var correctAnswer = questions[0].correct;
+
+function rightWrong() {
+    var x = answer.textContent;
+    if (x === correctAnswer) {
+        liveScore += 10;
+        wrongAnswer.style.display = "none";
+        rightAnswer.style.display = "block";
+    } else {
+    wrongAnswer.style.display = "block";
+    rightAnswer.style.display = "none";
+    secondsLeft = secondsLeft -10;
+    }
 }
+
+
+
+//Questions loop
+var liveScore = 0;
+var textIndex = 1;
+optionBtn.addEventListener("click", contQuiz)
+
+function contQuiz() {
+
+    // wrongAnswer.style.display = "none";
+    // rightAnswer.style.display = "none";
+
+    if (secondsLeft > 0 && liveScore < 10) {
+        if(textIndex < questions.length) {
+            quizQuestions.textContent = questions[textIndex].question;
+            textIndex++;
+            var x = questions[textIndex - 1]
+            for (var i = 0; i < x.choices.length; i++) {
+                answer[i].textContent = x.choices[i];
+                      }
+              } else {
+                secondsLeft = 0;
+                completedQuiz();
+                liveScore += secondsLeft;
+              }
+        } 
+            
+        };
+
+function completedQuiz() {
+    quizData.style.display = "none";
+    quizDone.style.display = "flex"; 
+    // finalScore.textContent = liveScore;  
+}
+
+submitHighScore.addEventListener("click", viewHighScores);
+
+function viewHighScores() {
+    quizDone.style.display = "none";
+    quizScore.style.display = "flex";
+};
+
+
+
+
 
