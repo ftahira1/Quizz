@@ -1,6 +1,6 @@
 // Questions variable
 
-var questions = [{
+const questions = [{
     question: "Commonly used data types DO not include:",
     choices: ["strings", "booleans", "alerts", "numbers"],
     correct: "alerts",
@@ -8,7 +8,7 @@ var questions = [{
 {
     question: "The condition in an if/else statement is enclosed within _____.",
     choices: ["quotes", "curly brackets", "parenthesis", "square brackets"],
-    correct: "4. parenthesis", 
+    correct: "parenthesis", 
 },
 {
     question: "Arrays in javascript can be used to store _______.",
@@ -36,7 +36,7 @@ var questions = [{
 
 //Header query selector
 var timeCountdown = document.querySelector("#time-countdown");
-var viewHighScores = document.querySelector("#view-high-scores");
+var highScores = document.querySelector("#high-scores");
 
 //Main query selector
 
@@ -51,7 +51,7 @@ var startQuiz = document.querySelector("#start-quiz");
 var answer = document.querySelectorAll(".answer");
 var submitHighScore = document.querySelector("#submit-high-score");
 var goBackBtn = document.querySelector("#go-back-btn");
-var clearHighScores = document.querySelector("#clear-high-scores");
+var clearScores = document.querySelector("#clear-btn");
 var button = document.querySelectorAll(".button");
 var optionBtn = document.querySelector(".option-buttons")
 
@@ -69,11 +69,13 @@ var scoreNumber = document.querySelector("#score-number");
 var secondsLeft = 60;
 var liveScore = 0;
 var Index = 0;
+let correctAnswer = questions[0].correct;
 
-
-//Quiz starts here
+//Quiz start event
 
 startQuiz.addEventListener("click", beginQuiz);
+
+//Functions
 
 function beginQuiz () {
     quizWelc.style.display = "none";
@@ -81,7 +83,7 @@ function beginQuiz () {
 
     timeCountdown.textContent = "Time: " +secondsLeft;
 
-    //Start countdown
+    //Start timer
     var setTime = setInterval(function() {
         if(secondsLeft > 0) {
             secondsLeft--;
@@ -93,19 +95,32 @@ function beginQuiz () {
     }, 1000);
 };
 
-var correctAswer = questions[Index].correct;
+highScores.addEventListener("click", viewScore);
+        function viewScore() {
+        quizWelc.style.display = "none";
+        quizScore.style.display = "flex";
+        quizDone.style.display = "none";
+        showScores();
+    }
 
-      //Validate answers
-      for (let i = 0; i < button.length; i++) {
-        button[i].addEventListener("click", checkAnswer);}
-    
-    
+goBackBtn.addEventListener("click", function() {
+    quizScore.style.display = "none";
+    quizWelc.style.display = "block";
+})
+
+clearScores.addEventListener("click", function() {
+    localStorage.clear();
+})
+
+//Validate answers
+for (let i = 0; i < button.length; i++) {
+    button[i].addEventListener("click", checkAnswer);}
+
 
 function checkAnswer(event) {
-    var x = event.target.children[1].textContent;
-    if (x === correctAswer) {
+    let x = event.currentTarget.children[1].textContent;
+    if (x === correctAnswer) {
         liveScore +=30;
-        finalScore.textContent = liveScore;
         rightAnswer.style.display = "flex";
         wrongAnswer.style.display = "none";
     } else {
@@ -118,32 +133,81 @@ function checkAnswer(event) {
         Index++;
         resQuiz();
     }, 700);
-}
+};
+
 
 function resQuiz() {
     rightAnswer.style.display = "none";
     wrongAnswer.style.display = "none";
 
     if (secondsLeft > 0 && Index < 6) {
-        for (var i = 1; i < questions.length; i++) {
+        for (let i = 1; i < questions.length; i++) {
             if (Index === i) {
                 quizQuestions.textContent = questions[i].question;
                 let a = questions[i];
-                for (var i = 0; i < a.choices.length; i++){
+                for (let i = 0; i < a.choices.length; i++){
                 answer[i].textContent = a.choices[i];
                 }
-                }
+                correctAnswer = questions[i].correct;
             }
         }
+    } else {
+        correctAnswer +=secondsLeft;
+        secondsLeft = 0;
+        completedQuiz();
     }
-
+};
 
 
 function completedQuiz() {
     quizData.style.display = "none";
     quizDone.style.display = "flex";
+    finalScore.textContent = liveScore;
+
+    submitHighScore.addEventListener("click", endQuiz);
+    
+    
+};
+
+var initials = document.querySelector("#initials");
+
+function endQuiz(event) {
+    event.preventDefault();
+    
+    
+
+    var userInfo = {
+        userInitials: initials.value,
+        userScore: liveScore,
+    }
+
+    if (initials.textContent = "") {
+        alert("This box can not be blank");
+    }
+
+    localStorage.setItem("userName",JSON.stringify(userInfo));
+
+    showScores();
 }
-console.log("here");
+
+function showScores() {
+
+    quizDone.style.display = "none";
+    quizScore.style.display = "flex";
+
+    var initials =localStorage.getItem("userName");
+
+    scoreNumber.textContent = initials + liveScore;
+
+
+}
+
+
+
+//Quiz start event
+
+startQuiz.addEventListener("click", beginQuiz);
+
 
 
 

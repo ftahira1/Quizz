@@ -39,12 +39,12 @@
     background-color: var(--violet--);
  }
 
- #view-high-scores {
+ #high-scores {
     font-family: var(--fontf--);
     color: var(--violet--)
  }
 
- #view-high-scores:hover {
+ #high-scores:hover {
    cursor: pointer;
  }
 
@@ -133,7 +133,7 @@
       font-size: 120%;
    }
 
-   #view-high-scores {
+   #high-scores {
         position: relative;
         left: 7%;
     }
