@@ -70,9 +70,9 @@ var secondsLeft = 60;
 var liveScore = 0;
 var Index = 0;
 let correctAnswer = questions[0].correct;
-var userName = [];
+var userInfo = [];
 var Score;
-var showHighScore;
+var finScore;
 
 //Quiz start event
 
@@ -166,12 +166,14 @@ function endQuiz(event) {
         userName = "Uknown";
     }
 
-    var userInfo = [userName,liveScore]
+    var userInfo = [{
+        initName: userName,
+        Score: liveScore}];
 
     
 
     localStorage.setItem("user info array", JSON.stringify(userInfo));
-    showHighScore = JSON.parse(localStorage.getItem("user info array"));
+    finScore = JSON.parse(localStorage.getItem("user info array"));
 
     showScores();
 }
@@ -181,8 +183,13 @@ function showScores() {
     quizDone.style.display = "none";
     quizScore.style.display = "flex";
 
-    scoreNumber.textContent = showHighScore;
+    
+    scoreNumber.textContent = `${finScore[0].initName}  ${finScore[0].Score}`
+    
 };
+    // for(let i = 0, i <= showHighScore.length)
+    // var a = document.createElement("ol")
+
 
 //View high score button
 highScores.addEventListener("click", function() {
@@ -191,7 +198,7 @@ highScores.addEventListener("click", function() {
     quizDone.style.display = "none";
     quizScore.style.display = "flex";
     if(localStorage.length != 0) {
-        showHighScore = JSON.parse(localStorage.getItem("user info array"));
+        finScore = JSON.parse(localStorage.getItem("user info array"));
     }
     showScores();
 }
@@ -199,10 +206,7 @@ highScores.addEventListener("click", function() {
 
 //Go back button
 goBackBtn.addEventListener("click", function(event) {
-    event.preventDefault
-    if(localStorage.length !== null) {
-        showHighScore = JSON.parse(localStorage.getItem("user info array"));
-    }
+    
     location.reload();
     }   
 );
@@ -212,7 +216,8 @@ goBackBtn.addEventListener("click", function(event) {
 clearScores.addEventListener("click", function() {
     localStorage.clear();
     location.reload();
-})
+}
+);
 
 
 
