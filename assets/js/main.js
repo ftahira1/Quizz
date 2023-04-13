@@ -70,8 +70,9 @@ var secondsLeft = 60;
 var liveScore = 0;
 var Index = 0;
 let correctAnswer = questions[0].correct;
-var userName;
+var userName = [];
 var Score;
+var showHighScore;
 
 //Quiz start event
 
@@ -165,10 +166,7 @@ function endQuiz(event) {
         userName = "Uknown";
     }
 
-    var userInfo = {
-        initName: userName,
-        Score: liveScore,
-    }
+    var userInfo = [userName,liveScore]
 
     
 
