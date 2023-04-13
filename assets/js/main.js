@@ -70,6 +70,8 @@ var secondsLeft = 60;
 var liveScore = 0;
 var Index = 0;
 let correctAnswer = questions[0].correct;
+var userName;
+var Score;
 
 //Quiz start event
 
@@ -94,23 +96,6 @@ function beginQuiz () {
         }
     }, 1000);
 };
-
-highScores.addEventListener("click", viewScore);
-        function viewScore() {
-        quizWelc.style.display = "none";
-        quizScore.style.display = "flex";
-        quizDone.style.display = "none";
-        showScores();
-    }
-
-goBackBtn.addEventListener("click", function() {
-    quizScore.style.display = "none";
-    quizWelc.style.display = "block";
-})
-
-clearScores.addEventListener("click", function() {
-    localStorage.clear();
-})
 
 //Validate answers
 for (let i = 0; i < button.length; i++) {
@@ -169,23 +154,26 @@ function completedQuiz() {
     
 };
 
-var initials = document.querySelector("#initials");
+
 
 function endQuiz(event) {
     event.preventDefault();
-    
-    
+
+    var userName = document.querySelector("#initials").value;
+
+    if(userName === "") {
+        userName = "Uknown";
+    }
 
     var userInfo = {
-        userInitials: initials.value,
-        userScore: liveScore,
+        initName: userName,
+        Score: liveScore,
     }
 
-    if (initials.textContent = "") {
-        alert("This box can not be blank");
-    }
+    
 
-    localStorage.setItem("userName",JSON.stringify(userInfo));
+    localStorage.setItem("user info array", JSON.stringify(userInfo));
+    showHighScore = JSON.parse(localStorage.getItem("user info array"));
 
     showScores();
 }
@@ -195,18 +183,38 @@ function showScores() {
     quizDone.style.display = "none";
     quizScore.style.display = "flex";
 
-    var initials =localStorage.getItem("userName");
+    scoreNumber.textContent = showHighScore;
+};
 
-    scoreNumber.textContent = initials + liveScore;
-
-
+//View high score button
+highScores.addEventListener("click", function() {
+    quizWelc.style.display = "none";
+    quizData.style.display = "none"
+    quizDone.style.display = "none";
+    quizScore.style.display = "flex";
+    if(localStorage.length != 0) {
+        showHighScore = JSON.parse(localStorage.getItem("user info array"));
+    }
+    showScores();
 }
+)
+
+//Go back button
+goBackBtn.addEventListener("click", function(event) {
+    event.preventDefault
+    if(localStorage.length !== null) {
+        showHighScore = JSON.parse(localStorage.getItem("user info array"));
+    }
+    location.reload();
+    }   
+);
 
 
-
-//Quiz start event
-
-startQuiz.addEventListener("click", beginQuiz);
+//Clear high scores button
+clearScores.addEventListener("click", function() {
+    localStorage.clear();
+    location.reload();
+})
 
 
 
