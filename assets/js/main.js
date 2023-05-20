@@ -127,16 +127,16 @@ function resQuiz() {
     wrongAnswer.style.display = "none";
 
     if (secondsLeft > 0 && Index < 6) {
-        for (let i = 1; i < questions.length; i++) {
-            if (Index === i) {
-                quizQuestions.textContent = questions[i].question;
-                let a = questions[i];
-                for (let i = 0; i < a.choices.length; i++){
-                answer[i].textContent = a.choices[i];
-                }
-                correctAnswer = questions[i].correct;
-            }
+        if (Index >= questions.length) {
+            Index = 0;
         }
+        quizQuestions.textContent = questions[Index].question;
+        let a = questions[Index];
+        for (let i = 0; i < a.choices.length; i++) {
+            answer[i].textContent = a.choices[i];
+        }
+        correctAnswer = a.correct;
+         
     } else {
         correctAnswer +=secondsLeft;
         secondsLeft = 0;
@@ -170,7 +170,12 @@ function endQuiz(event) {
         initName: userName,
         Score: liveScore}];
 
-    
+    var prevScores = JSON.parse(localStorage.getItem("user info array"));
+
+    prevScores.push({initName: userName,
+        Score: liveScore});
+        console.log(prevScores);
+        
 
     localStorage.setItem("user info array", JSON.stringify(userInfo));
     finScore = JSON.parse(localStorage.getItem("user info array"));
@@ -184,11 +189,12 @@ function showScores() {
     quizScore.style.display = "flex";
 
     
-    scoreNumber.textContent = `${finScore[0].initName}  ${finScore[0].Score}`
+    for (let i = 0; i < finScore.length; i++) {
+        scoreNumber.textContent = `${finScore[i].initName}  ${finScore[i].Score}`
+        }
     
 };
-    // for(let i = 0, i <= showHighScore.length)
-    // var a = document.createElement("ol")
+    
 
 
 //View high score button
@@ -199,8 +205,8 @@ highScores.addEventListener("click", function() {
     quizScore.style.display = "flex";
     if(localStorage.length != 0) {
         finScore = JSON.parse(localStorage.getItem("user info array"));
+        showScores();
     }
-    showScores();
 }
 )
 
